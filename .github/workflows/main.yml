@@ -33,7 +33,7 @@ jobs:
         # запуск проверки проекта по flake8
         python -m flake8
         # перейти в папку, содержащую manage.py — 
-        #<корневая_папка_infra_actions>/<папка_проекта>/manage.py
+          #<корневая_папка_infra_actions>/<папка_проекта>/manage.py
         cd infra_project/
         # запустить написанные разработчиком тесты
         python manage.py test
@@ -74,6 +74,6 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         passphrase: ${{ secrets.PASSPHRASE }} 
         script: |
-          sudo docker pull andreafaf/infra
+          sudo docker pull ${{ secrets.DOCKER_USERNAME }}/infra
           sudo docker stop $(sudo docker ps -a -q)
-          sudo docker run --rm -d -p 5000:5000 andreafaf/infra
+          sudo docker run --rm -d -p 5000:5000 ${{ secrets.DOCKER_USERNAME }}/infra:v1
